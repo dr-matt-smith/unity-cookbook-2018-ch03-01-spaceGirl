@@ -13,6 +13,9 @@ public class PlayerMove : MonoBehaviour
 	// cached reference to a physics RigidBody
 	private Rigidbody2D rigidBody2D;
 
+	// the new velocity based on inputs
+	private Vector2 newVelocity;
+
 	//--------------------------
 	// get reference tot the RigidBody 2D compoonent
 	// that is in the parent GameObject to which an instance of this script has been added
@@ -22,7 +25,7 @@ public class PlayerMove : MonoBehaviour
 	}
 
 	//---------------------------
-	void FixedUpdate()
+	void Update()
 	{
 		// read from movement keys
 		// arrow keys / WASD
@@ -35,8 +38,12 @@ public class PlayerMove : MonoBehaviour
 		float ySpeed = yMove * speed;
 
 		// create (dx,dy) vector object
-		Vector2 newVelocity = new Vector2(xSpeed, ySpeed);
-
+		newVelocity = new Vector2(xSpeed, ySpeed);
+	}
+	
+	//---------------------------
+	void FixedUpdate()
+	{
 		// set the velocity of the Physicsl rigid body to this (x,y) vector
 		rigidBody2D.velocity = newVelocity;
 	}
